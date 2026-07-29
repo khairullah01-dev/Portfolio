@@ -34,17 +34,23 @@ app.use('/api/contact', contactRoutes);
 app.use(express.static(frontendDist));
 app.get('*', (_request, response) => response.sendFile(path.join(frontendDist, 'index.html')));
 
+// Ensure database connection for incoming API requests
+app.use(async (req, _res, next) => {
+  if (req.path.startsWith('/api')) {
+    try {
+      await connectDB();
+    } catch (error) {
+      return next(error);
+    }
+  }
+  next();
+});
+
 app.use(notFound);
 app.use(errorHandler);
 
-const startServer = async () => {
-  try {
-    await connectDB();
-    app.listen(port, () => console.log(`Portfolio API listening at http://localhost:${port}`));
-  } catch (error) {
-    console.error(`Unable to start server: ${error.message}`);
-    process.exit(1);
-  }
-};
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(port, () => console.log(`Portfolio API listening at http://localhost:${port}`));
+}
 
-startServer();
+export default app;
