@@ -1,0 +1,65 @@
+{
+  "users": [
+    {
+      "_id": "default-admin-id",
+      "username": "admin",
+      "password": "$2a$10$xXNpeUtx9H2MwmJVGhwVsu2Ye1z8pO2/o.Wug9ZGztkhWOZGMEoqG",
+      "createdAt": "2026-06-21T08:24:36.141Z"
+    }
+  ],
+  "projects": [
+    {
+      "_id": "proj-1",
+      "title": "Portfolio Website",
+      "image": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=600",
+      "link": "#",
+      "description": "A beautiful and modern portfolio website showcasing frontend and backend developer skills.",
+      "createdAt": "2026-06-21T08:24:36.142Z"
+    },
+    {
+      "_id": "5b170685-24b2-4d6c-8a64-c49e419295d9",
+      "title": "llll",
+      "image": "/uploads/1785254306001-c091962c-d154-4827-a20f-9cc9159b9d0b.png",
+      "link": "https://www.youtube.com/watch?v=a18py61_F_w&list=RDa18py61_F_w&start_radio=1",
+      "description": "vnvnvn",
+      "createdAt": "2026-07-28T15:58:26.005Z"
+    }
+  ],
+  "experience": [
+    {
+      "_id": "exp-1",
+      "title": "+10 ans",
+      "subtitle": "experience"
+    },
+    {
+      "_id": "exp-2",
+      "title": "+1.3K",
+      "subtitle": "Client"
+    },
+    {
+      "_id": "exp-3",
+      "title": "+74",
+      "subtitle": "Completed projects"
+    },
+    {
+      "_id": "exp-4",
+      "title": "+1.5k",
+      "subtitle": "Services"
+    }
+  ],
+  "contact": {
+    "heroName": "Khairullah",
+    "heroBio": "Passionate developer crafting modern, high-performance web applications.",
+    "skillsTitle": "Front-end developer",
+    "skillsBio": "Specializing in building clean, responsive, and high-performance web applications using modern technologies.",
+    "experienceBio": "Over the years, I have worked with diverse clients and projects delivering top-quality web engineering solutions.",
+    "projectsBio": "Explore a selection of recent web applications and projects built with cutting-edge technologies.",
+    "phone": "+99 999999999",
+    "email": "myemail@eamil.com",
+    "linkedin": "",
+    "facebook": "",
+    "twitter": "",
+    "instagram": ""
+  },
+  "messages": []
+}
