@@ -9,36 +9,25 @@ const Hero = () => {
     const [heroBio, setHeroBio] = useState('Passionate developer crafting modern, high-performance web applications.')
 
     useEffect(() => {
-      const fetchHeroData = () => {
         fetch(`${API_BASE_URL}/contact`)
-          .then(async (res) => {
-            if (!res.ok) throw new Error('Unable to load hero data')
-            return res.json()
-          })
-          .then((data) => {
-            if (data?.picture) {
-              setHeroImage(getUploadUrl(data.picture))
-            }
-            if (data?.heroName) {
-              setHeroName(data.heroName)
-            }
-            if (data?.heroBio) {
-              setHeroBio(data.heroBio)
-            }
-          })
-          .catch(() => {
-            setHeroImage(profileImage)
-          })
-      }
-
-      fetchHeroData()
-      const intervalId = setInterval(fetchHeroData, 3000)
-      window.addEventListener('focus', fetchHeroData)
-
-      return () => {
-        clearInterval(intervalId)
-        window.removeEventListener('focus', fetchHeroData)
-      }
+            .then(async (res) => {
+                if (!res.ok) throw new Error('Unable to load hero data')
+                return res.json()
+            })
+            .then((data) => {
+                if (data?.picture) {
+                    setHeroImage(getUploadUrl(data.picture))
+                }
+                if (data?.heroName) {
+                    setHeroName(data.heroName)
+                }
+                if (data?.heroBio) {
+                    setHeroBio(data.heroBio)
+                }
+            })
+            .catch(() => {
+                setHeroImage(profileImage)
+            })
     }, [])
 
     return (

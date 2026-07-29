@@ -13,42 +13,31 @@ const Experience = () => {
   const [experienceBio, setExperienceBio] = useState('Over the years, I have worked with diverse clients and projects delivering top-quality web engineering solutions.');
 
   useEffect(() => {
-    const fetchExperienceData = () => {
-      fetch(`${API_BASE_URL}/experience`)
-        .then((res) => {
-          if (!res.ok) throw new Error('API server returned error');
-          return res.json();
-        })
-        .then((data) => {
-          if (data && data.length > 0) {
-            const formatted = data.map((item) => ({
-              title: item.title,
-              subtitle: item.subtitle,
-            }));
-            setStats(formatted);
-          }
-        })
-        .catch((err) => {
-          console.warn('Backend API not available, using local fallback stats:', err.message);
-        });
+    fetch(`${API_BASE_URL}/experience`)
+      .then((res) => {
+        if (!res.ok) throw new Error('API server returned error');
+        return res.json();
+      })
+      .then((data) => {
+        if (data && data.length > 0) {
+          const formatted = data.map((item) => ({
+            title: item.title,
+            subtitle: item.subtitle,
+          }));
+          setStats(formatted);
+        }
+      })
+      .catch((err) => {
+        console.warn('Backend API not available, using local fallback stats:', err.message);
+      });
 
-      fetch(`${API_BASE_URL}/contact`)
-        .then(async (res) => {
-          if (!res.ok) return;
-          const data = await res.json();
-          if (data?.experienceBio) setExperienceBio(data.experienceBio);
-        })
-        .catch(() => {});
-    };
-
-    fetchExperienceData();
-    const intervalId = setInterval(fetchExperienceData, 3000);
-    window.addEventListener('focus', fetchExperienceData);
-
-    return () => {
-      clearInterval(intervalId);
-      window.removeEventListener('focus', fetchExperienceData);
-    };
+    fetch(`${API_BASE_URL}/contact`)
+      .then(async (res) => {
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data?.experienceBio) setExperienceBio(data.experienceBio);
+      })
+      .catch(() => { });
   }, []);
   return (
     <section id="Experience" className="bg-white px-6 py-20">

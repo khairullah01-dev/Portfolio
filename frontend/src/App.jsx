@@ -1,22 +1,14 @@
-import Hero from './components/Hero.jsx'
-import Skills from './components/Skills.jsx'
-import Experience from './components/Experience.jsx'
-import ProjectsIntro from './components/ProjectsIntro.jsx'
-import Contact from './components/Contact.jsx'
-import Footer from './components/Footer.jsx'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PublicSite from './components/PublicSite.jsx';
+import AdminApp from './admin/AdminApp.jsx';
 
-
-const App = () => {
+export default function App() {
   return (
-    <div className="font-sans bg-white">
-       <Hero />
-       <Skills />
-       <Experience />
-       <ProjectsIntro />
-       <Contact />
-       <Footer />
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/admin/*" element={<AdminApp />} />
+        <Route path="/*" element={<PublicSite />} />
+      </Routes>
+    </Router>
+  );
 }
-
-export default App

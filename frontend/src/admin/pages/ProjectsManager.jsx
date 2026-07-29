@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import { getUploadUrl } from '../config/api.js';
+import { getUploadUrl } from '../../config/api.js';
 
 export default function ProjectsManager() {
   const [projects, setProjects] = useState([]);

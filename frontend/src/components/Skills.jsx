@@ -13,38 +13,27 @@ const Skills = () => {
   const [img3, setImg3] = useState(projectEcommerce2)
 
   useEffect(() => {
-    const fetchSkills = () => {
-      fetch(`${API_BASE_URL}/contact`)
-        .then(async (res) => {
-          if (!res.ok) throw new Error('Unable to load skills settings')
-          return res.json()
-        })
-        .then((data) => {
-          if (data?.skillsTitle) setSkillsTitle(data.skillsTitle)
-          if (data?.skillsBio) setSkillsBio(data.skillsBio)
-          if (data?.resume) setResumeUrl(getUploadUrl(data.resume))
-          if (data?.skillsImage1) setImg1(getUploadUrl(data.skillsImage1))
-          if (data?.skillsImage2) setImg2(getUploadUrl(data.skillsImage2))
-          if (data?.skillsImage3) setImg3(getUploadUrl(data.skillsImage3))
-        })
-        .catch(() => {})
-    }
-
-    fetchSkills()
-    const intervalId = setInterval(fetchSkills, 3000)
-    window.addEventListener('focus', fetchSkills)
-
-    return () => {
-      clearInterval(intervalId)
-      window.removeEventListener('focus', fetchSkills)
-    }
+    fetch(`${API_BASE_URL}/contact`)
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Unable to load skills settings')
+        return res.json()
+      })
+      .then((data) => {
+        if (data?.skillsTitle) setSkillsTitle(data.skillsTitle)
+        if (data?.skillsBio) setSkillsBio(data.skillsBio)
+        if (data?.resume) setResumeUrl(getUploadUrl(data.resume))
+        if (data?.skillsImage1) setImg1(getUploadUrl(data.skillsImage1))
+        if (data?.skillsImage2) setImg2(getUploadUrl(data.skillsImage2))
+        if (data?.skillsImage3) setImg3(getUploadUrl(data.skillsImage3))
+      })
+      .catch(() => { })
   }, [])
 
   return (
     <section id="Skills" className="bg-white px-6 py-20">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start">
-          
+
           {/* Left Column - Details */}
           <div className="lg:col-span-5 flex flex-col items-start">
             <span className="text-sm font-semibold uppercase tracking-wider text-sky-500">
@@ -78,7 +67,7 @@ const Skills = () => {
                 onError={(e) => { e.target.src = projectFrontend }}
               />
             </div>
-            
+
             {/* Bottom side-by-side layouts */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="overflow-hidden rounded-xl border border-slate-200 bg-white p-1 shadow-md hover:shadow-lg transition-shadow duration-300">

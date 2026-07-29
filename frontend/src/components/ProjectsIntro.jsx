@@ -30,49 +30,38 @@ const ProjectsIntro = () => {
   const [projectsBio, setProjectsBio] = useState('Explore a selection of recent web applications and projects built with cutting-edge technologies.');
 
   useEffect(() => {
-    const fetchProjectsData = () => {
-      fetch(`${API_BASE_URL}/projects`)
-        .then((res) => {
-          if (!res.ok) throw new Error('API server returned error');
-          return res.json();
-        })
-        .then((data) => {
-          if (data && data.length > 0) {
-            const formatted = data.map((proj) => ({
-              id: proj._id,
-              title: proj.title,
-              image: getUploadUrl(proj.image),
-              link: proj.link || '#',
-            }));
-            setProjects(formatted);
-          }
-        })
-        .catch((err) => {
-          console.warn('Backend API not available, using local fallback data:', err.message);
-        });
+    fetch(`${API_BASE_URL}/projects`)
+      .then((res) => {
+        if (!res.ok) throw new Error('API server returned error');
+        return res.json();
+      })
+      .then((data) => {
+        if (data && data.length > 0) {
+          const formatted = data.map((proj) => ({
+            id: proj._id,
+            title: proj.title,
+            image: getUploadUrl(proj.image),
+            link: proj.link || '#',
+          }));
+          setProjects(formatted);
+        }
+      })
+      .catch((err) => {
+        console.warn('Backend API not available, using local fallback data:', err.message);
+      });
 
-      fetch(`${API_BASE_URL}/contact`)
-        .then(async (res) => {
-          if (!res.ok) return;
-          const data = await res.json();
-          if (data?.projectsBio) setProjectsBio(data.projectsBio);
-        })
-        .catch(() => {});
-    };
-
-    fetchProjectsData();
-    const intervalId = setInterval(fetchProjectsData, 3000);
-    window.addEventListener('focus', fetchProjectsData);
-
-    return () => {
-      clearInterval(intervalId);
-      window.removeEventListener('focus', fetchProjectsData);
-    };
+    fetch(`${API_BASE_URL}/contact`)
+      .then(async (res) => {
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data?.projectsBio) setProjectsBio(data.projectsBio);
+      })
+      .catch(() => { });
   }, []);
   return (
     <section id="Projects" className="bg-[#132247] px-6 py-24 text-white">
       <div className="mx-auto max-w-7xl">
-        
+
         {/* Header Grid */}
         <div className="grid grid-cols-1 gap-8 items-start lg:grid-cols-12 mb-16">
           <div className="lg:col-span-4 flex flex-col items-start">

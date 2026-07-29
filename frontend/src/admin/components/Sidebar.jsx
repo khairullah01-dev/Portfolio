@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 export default function Sidebar() {
   const links = [
     {
-      to: '/dashboard',
+      to: '/admin/dashboard',
       label: 'Dashboard',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -12,7 +12,7 @@ export default function Sidebar() {
       ),
     },
     {
-      to: '/projects',
+      to: '/admin/projects',
       label: 'Projects',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -21,7 +21,7 @@ export default function Sidebar() {
       ),
     },
     {
-      to: '/stats',
+      to: '/admin/stats',
       label: 'Stats / Experience',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -30,7 +30,7 @@ export default function Sidebar() {
       ),
     },
     {
-      to: '/messages',
+      to: '/admin/messages',
       label: 'Messages',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -39,7 +39,7 @@ export default function Sidebar() {
       ),
     },
     {
-      to: '/contact',
+      to: '/admin/contact',
       label: 'Site & Contact Settings',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

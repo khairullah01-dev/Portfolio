@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 
 import { AuthContext } from './auth/AuthContext.jsx';
@@ -11,12 +11,12 @@ import MessagesManager from './pages/MessagesManager.jsx';
 import ContactManager from './pages/ContactManager.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import Header from './components/Header.jsx';
-import { API_BASE_URL } from './config/api.js';
+import { API_BASE_URL } from '../config/api.js';
 
 // Configure Axios
 axios.defaults.baseURL = API_BASE_URL;
 
-export default function App() {
+export default function AdminApp() {
   const [token, setToken] = useState(() => localStorage.getItem('adminToken') || null);
   const [loading, setLoading] = useState(() => Boolean(localStorage.getItem('adminToken')));
 
@@ -33,7 +33,6 @@ export default function App() {
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      // Verify token
       axios.get('/auth/profile')
         .then(() => {
           setLoading(false);
@@ -60,30 +59,28 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={{ token, login, logout }}>
-      <Router basename="/admin">
-        <Routes>
-          <Route path="/login" element={!token ? <Login /> : <Navigate to="/dashboard" replace />} />
-          <Route
-            path="/*"
-            element={
-              token ? (
-                <Layout>
-                  <Routes>
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/projects" element={<ProjectsManager />} />
-                    <Route path="/stats" element={<StatsManager />} />
-                    <Route path="/messages" element={<MessagesManager />} />
-                    <Route path="/contact" element={<ContactManager />} />
-                    <Route path="*" element={<Navigate to="/dashboard" replace />} />
-                  </Routes>
-                </Layout>
-              ) : (
-                <Navigate to="/login" replace />
-              )
-            }
-          />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="login" element={!token ? <Login /> : <Navigate to="/admin/dashboard" replace />} />
+        <Route
+          path="*"
+          element={
+            token ? (
+              <Layout>
+                <Routes>
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="projects" element={<ProjectsManager />} />
+                  <Route path="stats" element={<StatsManager />} />
+                  <Route path="messages" element={<MessagesManager />} />
+                  <Route path="contact" element={<ContactManager />} />
+                  <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
+                </Routes>
+              </Layout>
+            ) : (
+              <Navigate to="/admin/login" replace />
+            )
+          }
+        />
+      </Routes>
     </AuthContext.Provider>
   );
 }
