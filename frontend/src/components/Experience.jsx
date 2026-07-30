@@ -10,7 +10,7 @@ const fallbackStats = [
 
 const Experience = () => {
   const [stats, setStats] = useState(fallbackStats);
-  const [experienceBio, setExperienceBio] = useState('Over the years, I have worked with diverse clients and projects delivering top-quality web engineering solutions.');
+  const [experienceBio, setExperienceBio] = useState('');
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/experience`)

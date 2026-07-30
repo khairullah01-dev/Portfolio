@@ -1,33 +1,9 @@
 import { useEffect, useState } from 'react'
-import projectFrontend from '../assets/project_frontend.png'
-import projectEcommerce1 from '../assets/project_ecommerce_1.png'
-import projectEcommerce2 from '../assets/project_ecommerce_2.png'
 import { API_BASE_URL, getUploadUrl } from '../config/api.js'
 
-const fallbackProjects = [
-  {
-    id: 1,
-    title: 'Portfolio',
-    image: projectFrontend,
-    link: '#',
-  },
-  {
-    id: 2,
-    title: 'site web ecommerce',
-    image: projectEcommerce1,
-    link: '#',
-  },
-  {
-    id: 3,
-    title: 'site web ecommerce',
-    image: projectEcommerce2,
-    link: '#',
-  },
-]
-
 const ProjectsIntro = () => {
-  const [projects, setProjects] = useState(fallbackProjects);
-  const [projectsBio, setProjectsBio] = useState('Explore a selection of recent web applications and projects built with cutting-edge technologies.');
+  const [projects, setProjects] = useState([]);
+  const [projectsBio, setProjectsBio] = useState('');
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/projects`)
@@ -75,7 +51,7 @@ const ProjectsIntro = () => {
           </div>
           <div className="lg:col-span-8">
             <p className="text-base leading-relaxed text-slate-300">
-              {projectsBio}
+              {projectsBio || 'Loading project details...'}
             </p>
           </div>
         </div>
@@ -88,6 +64,9 @@ const ProjectsIntro = () => {
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
+                  width="600"
+                  height="400"
                   className="w-full h-auto object-cover rounded-lg transition-transform duration-500 group-hover:scale-[1.01]"
                 />
               </div>

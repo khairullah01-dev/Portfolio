@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import Navbar from './Navbar'
-import profileImage from '../assets/handsome.jpg'
 import { API_BASE_URL, getUploadUrl } from '../config/api.js'
 
 const Hero = () => {
-    const [heroImage, setHeroImage] = useState(profileImage)
-    const [heroName, setHeroName] = useState('Khairullah')
-    const [heroBio, setHeroBio] = useState('Passionate developer crafting modern, high-performance web applications.')
+    const [heroImage, setHeroImage] = useState('')
+    const [heroName, setHeroName] = useState('')
+    const [heroBio, setHeroBio] = useState('')
 
     useEffect(() => {
         fetch(`${API_BASE_URL}/contact`)
@@ -26,7 +25,7 @@ const Hero = () => {
                 }
             })
             .catch(() => {
-                setHeroImage(profileImage)
+                setHeroImage('')
             })
     }, [])
 
@@ -62,6 +61,9 @@ const Hero = () => {
                         <img
                             src={heroImage}
                             alt="Khairullah"
+                            loading="lazy"
+                            width="500"
+                            height="500"
                             className="mx-auto w-full max-h-[400px] md:max-h-[500px] object-cover rounded-t-2xl drop-shadow-[0_20px_35px_rgba(0,0,0,0.3)]"
                         />
                     </div>

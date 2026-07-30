@@ -5,8 +5,8 @@ import projectEcommerce2 from '../assets/project_ecommerce_2.png'
 import { API_BASE_URL, getUploadUrl } from '../config/api.js'
 
 const Skills = () => {
-  const [skillsTitle, setSkillsTitle] = useState('Front-end developer')
-  const [skillsBio, setSkillsBio] = useState('Specializing in building clean, responsive, and high-performance web applications using modern technologies.')
+  const [skillsTitle, setSkillsTitle] = useState('')
+  const [skillsBio, setSkillsBio] = useState('')
   const [resumeUrl, setResumeUrl] = useState('/resume.pdf')
   const [img1, setImg1] = useState(projectFrontend)
   const [img2, setImg2] = useState(projectEcommerce1)
@@ -63,6 +63,9 @@ const Skills = () => {
               <img
                 src={img1}
                 alt="Front-end development layout"
+                loading="lazy"
+                width="800"
+                height="500"
                 className="w-full h-auto max-h-72 object-cover rounded-lg"
                 onError={(e) => { e.target.src = projectFrontend }}
               />
@@ -74,6 +77,9 @@ const Skills = () => {
                 <img
                   src={img2}
                   alt="Project mockup 1"
+                  loading="lazy"
+                  width="400"
+                  height="300"
                   className="w-full h-auto max-h-56 object-cover rounded-lg"
                   onError={(e) => { e.target.src = projectEcommerce1 }}
                 />
@@ -82,6 +88,9 @@ const Skills = () => {
                 <img
                   src={img3}
                   alt="Project mockup 2"
+                  loading="lazy"
+                  width="400"
+                  height="300"
                   className="w-full h-auto max-h-56 object-cover rounded-lg"
                   onError={(e) => { e.target.src = projectEcommerce2 }}
                 />
