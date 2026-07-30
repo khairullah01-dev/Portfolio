@@ -22,6 +22,7 @@ const frontendDist = path.join(__dirname, '..', 'frontend', 'dist');
 // 1. Explicit CORS configuration
 const allowedOrigins = [
   'https://portfolio-nine-sepia-91.vercel.app',
+  
   'http://localhost:3000',
   'http://localhost:5174'
 ];
