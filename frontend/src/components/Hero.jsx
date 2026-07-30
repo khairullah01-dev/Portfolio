@@ -60,7 +60,7 @@ const Hero = () => {
                     <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
                         <img
                             src={heroImage}
-                            alt="Khairullah"
+                            alt=""
                             loading="lazy"
                             width="500"
                             height="500"
