@@ -10,6 +10,13 @@ export default function Dashboard() {
   });
   const [recentMessages, setRecentMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+  });
+  const [passwordStatus, setPasswordStatus] = useState({ type: '', message: '' });
+  const [passwordSubmitting, setPasswordSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +43,23 @@ export default function Dashboard() {
 
     fetchData();
   }, []);
+
+  const handlePasswordChange = async (event) => {
+    event.preventDefault();
+    setPasswordSubmitting(true);
+    setPasswordStatus({ type: '', message: '' });
+
+    try {
+      await axios.post('/auth/change-password', passwordForm);
+      setPasswordStatus({ type: 'success', message: 'Password changed successfully.' });
+      setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+    } catch (error) {
+      const message = error?.response?.data?.message || 'Unable to change password right now.';
+      setPasswordStatus({ type: 'error', message });
+    } finally {
+      setPasswordSubmitting(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -208,7 +232,49 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="mt-8 p-4 bg-blue-50/60 border border-blue-100 rounded-xl">
+          <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <h4 className="text-sm font-bold text-slate-900">Change Admin Password</h4>
+            <form onSubmit={handlePasswordChange} className="mt-3 space-y-2">
+              <input
+                type="password"
+                placeholder="Current password"
+                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none focus:border-sky-500"
+                value={passwordForm.currentPassword}
+                onChange={(event) => setPasswordForm((prev) => ({ ...prev, currentPassword: event.target.value }))}
+                required
+              />
+              <input
+                type="password"
+                placeholder="New password"
+                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none focus:border-sky-500"
+                value={passwordForm.newPassword}
+                onChange={(event) => setPasswordForm((prev) => ({ ...prev, newPassword: event.target.value }))}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Confirm new password"
+                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none focus:border-sky-500"
+                value={passwordForm.confirmPassword}
+                onChange={(event) => setPasswordForm((prev) => ({ ...prev, confirmPassword: event.target.value }))}
+                required
+              />
+              {passwordStatus.message ? (
+                <p className={`text-xs ${passwordStatus.type === 'success' ? 'text-emerald-600' : 'text-rose-600'}`}>
+                  {passwordStatus.message}
+                </p>
+              ) : null}
+              <button
+                type="submit"
+                disabled={passwordSubmitting}
+                className="w-full rounded-lg bg-[#132247] px-3 py-2 text-sm font-semibold text-white transition hover:bg-sky-700 disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {passwordSubmitting ? 'Updating...' : 'Update Password'}
+              </button>
+            </form>
+          </div>
+
+          <div className="mt-6 p-4 bg-blue-50/60 border border-blue-100 rounded-xl">
             <span className="text-xs font-black text-[#132247] tracking-wider block uppercase mb-1">
               Admin Tip
             </span>
