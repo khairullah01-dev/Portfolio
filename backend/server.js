@@ -49,8 +49,8 @@ app.use(async (req, _res, next) => {
 app.use(notFound);
 app.use(errorHandler);
 
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
-  app.listen(port, () => console.log(`Portfolio API listening at http://localhost:${port}`));
-}
+// if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+//   app.listen(port, () => console.log(`Portfolio API listening at http://localhost:${port}`));
+// }
 
 export default app;
