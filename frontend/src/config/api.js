@@ -11,6 +11,10 @@ export const getUploadUrl = (imagePath) => {
   if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) return imagePath;
   if (!imagePath.startsWith('/uploads/')) return imagePath;
 
+  if (!import.meta.env.DEV && imagePath.startsWith('/uploads/')) {
+    return '';
+  }
+
   const apiOrigin = API_BASE_URL.replace(/\/api\/?$/, '');
   return `${apiOrigin}${imagePath}`;
 };
