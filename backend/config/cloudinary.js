@@ -14,14 +14,20 @@ export const uploadToCloudinary = async (fileBuffer, originalName, mimeType, fol
     || mimeType === 'application/x-pdf'
     || safeName.toLowerCase().endsWith('.pdf');
   const resourceType = isPdf ? 'raw' : 'image';
+  const normalizedName = safeName.replace(/\.[^/.]+$/, '');
 
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
         folder,
         resource_type: resourceType,
-        public_id: `${Date.now()}-${safeName}`,
+        type: 'upload',
+        public_id: `${Date.now()}-${normalizedName}`,
         access_mode: 'public',
+        overwrite: true,
+        invalidate: true,
+        use_filename: false,
+        unique_filename: false,
       },
       (error, result) => {
         if (error) return reject(error);
