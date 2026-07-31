@@ -1,5 +1,6 @@
 import { cleanText } from '../utils/text.js';
 import { removeUpload } from '../middleware/uploadMiddleware.js';
+import { uploadToCloudinary } from '../config/cloudinary.js';
 import { findContact, upsertContact } from '../models/contactModel.js';
 
 const defaultContact = {
@@ -72,15 +73,20 @@ export const uploadContactPicture = async (request, response) => {
     return response.status(400).json({ message: 'Picture file is required' });
   }
 
-  const existingContact = await findContact();
-  const picture = `/uploads/${request.file.filename}`;
-  const contact = await upsertContact({ picture });
+  try {
+    const existingContact = await findContact();
+    const uploaded = await uploadToCloudinary(request.file.buffer, request.file.originalname, request.file.mimetype, 'portfolio');
+    const picture = uploaded.secure_url;
+    const contact = await upsertContact({ picture });
 
-  if (existingContact?.picture && existingContact.picture !== picture) {
-    removeUpload(existingContact.picture);
+    if (existingContact?.picture && existingContact.picture !== picture) {
+      await removeUpload(existingContact.picture);
+    }
+
+    return response.json(contact);
+  } catch (error) {
+    return response.status(400).json({ message: error.message || 'Failed to upload picture to Cloudinary' });
   }
-
-  return response.json(contact);
 };
 
 export const uploadContactResume = async (request, response) => {
@@ -88,15 +94,20 @@ export const uploadContactResume = async (request, response) => {
     return response.status(400).json({ message: 'Resume file is required' });
   }
 
-  const existingContact = await findContact();
-  const resume = `/uploads/${request.file.filename}`;
-  const contact = await upsertContact({ resume });
+  try {
+    const existingContact = await findContact();
+    const uploaded = await uploadToCloudinary(request.file.buffer, request.file.originalname, request.file.mimetype, 'portfolio/resume');
+    const resume = uploaded.secure_url;
+    const contact = await upsertContact({ resume });
 
-  if (existingContact?.resume && existingContact.resume !== resume) {
-    removeUpload(existingContact.resume);
+    if (existingContact?.resume && existingContact.resume !== resume) {
+      await removeUpload(existingContact.resume);
+    }
+
+    return response.json(contact);
+  } catch (error) {
+    return response.status(400).json({ message: error.message || 'Failed to upload resume to Cloudinary' });
   }
-
-  return response.json(contact);
 };
 
 export const uploadSkillsImage = async (request, response) => {
@@ -109,14 +120,19 @@ export const uploadSkillsImage = async (request, response) => {
     return response.status(400).json({ message: 'Image file is required' });
   }
 
-  const fieldName = `skillsImage${index}`;
-  const existingContact = await findContact();
-  const imagePath = `/uploads/${request.file.filename}`;
-  const contact = await upsertContact({ [fieldName]: imagePath });
+  try {
+    const fieldName = `skillsImage${index}`;
+    const existingContact = await findContact();
+    const uploaded = await uploadToCloudinary(request.file.buffer, request.file.originalname, request.file.mimetype, 'portfolio/skills');
+    const imagePath = uploaded.secure_url;
+    const contact = await upsertContact({ [fieldName]: imagePath });
 
-  if (existingContact?.[fieldName] && existingContact[fieldName] !== imagePath) {
-    removeUpload(existingContact[fieldName]);
+    if (existingContact?.[fieldName] && existingContact[fieldName] !== imagePath) {
+      await removeUpload(existingContact[fieldName]);
+    }
+
+    return response.json(contact);
+  } catch (error) {
+    return response.status(400).json({ message: error.message || 'Failed to upload skills image to Cloudinary' });
   }
-
-  return response.json(contact);
 };

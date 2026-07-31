@@ -1,20 +1,20 @@
-import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import multer from 'multer';
 
+import { deleteFromCloudinary } from '../config/cloudinary.js';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-export const uploadsPath = path.join(__dirname, '..', 'uploads');
+const isServerlessWritableRuntime = Boolean(process.env.VERCEL);
+
+export const uploadsPath = isServerlessWritableRuntime
+  ? path.join('/tmp', 'portfolio-uploads')
+  : path.join(__dirname, '..', 'uploads');
+
 fs.mkdirSync(uploadsPath, { recursive: true });
 
-const storage = multer.diskStorage({
-  destination: (_request, _file, callback) => callback(null, uploadsPath),
-  filename: (_request, file, callback) => callback(
-    null,
-    `${Date.now()}-${crypto.randomUUID()}${path.extname(file.originalname).toLowerCase()}`,
-  ),
-});
+const storage = multer.memoryStorage();
 
 export const upload = multer({
   storage,
@@ -32,8 +32,16 @@ export const uploadPdf = multer({
   },
 });
 
-export const removeUpload = (image) => {
-  if (!image?.startsWith('/uploads/')) return;
-  const filepath = path.join(uploadsPath, path.basename(image));
-  if (fs.existsSync(filepath)) fs.unlinkSync(filepath);
+export const removeUpload = async (image) => {
+  if (!image || typeof image !== 'string') return;
+
+  if (image.startsWith('/uploads/')) {
+    const filepath = path.join(uploadsPath, path.basename(image));
+    if (fs.existsSync(filepath)) fs.unlinkSync(filepath);
+    return;
+  }
+
+  if (image.includes('cloudinary.com')) {
+    await deleteFromCloudinary(image);
+  }
 };
