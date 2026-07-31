@@ -13,25 +13,29 @@ const Skills = () => {
   const [img3, setImg3] = useState(projectEcommerce2)
 
   const handleDownloadResume = async () => {
-    const targetUrl = resumeUrl || '/resume.pdf'
+    const candidates = [resumeUrl, '/resume.pdf']
 
-    try {
-      const response = await fetch(targetUrl)
-      if (!response.ok) throw new Error('Resume not available')
+    for (const targetUrl of candidates) {
+      try {
+        const response = await fetch(targetUrl)
+        if (!response.ok) continue
 
-      const blob = await response.blob()
-      const blobUrl = URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = blobUrl
-      link.download = 'resume.pdf'
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-      URL.revokeObjectURL(blobUrl)
-      return
-    } catch (_error) {
-      window.open(targetUrl, '_blank', 'noopener,noreferrer')
+        const blob = await response.blob()
+        const blobUrl = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = blobUrl
+        link.download = 'resume.pdf'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(blobUrl)
+        return
+      } catch (_error) {
+        continue
+      }
     }
+
+    window.open('/resume.pdf', '_blank', 'noopener,noreferrer')
   }
 
   useEffect(() => {
