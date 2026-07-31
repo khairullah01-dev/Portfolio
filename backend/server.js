@@ -19,6 +19,20 @@ const app = express();
 const port = Number(process.env.PORT) || 5000;
 const frontendDist = path.join(__dirname, '..', 'frontend', 'dist');
 
+const uploadsFileHandler = (request, response, next) => {
+  const ext = path.extname(request.path).toLowerCase();
+  const fileName = path.basename(request.path)
+    || 'download-file';
+
+  if (ext === '.pdf') {
+    response.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+  } else {
+    response.setHeader('Content-Disposition', `inline; filename="${fileName}"`);
+  }
+
+  next();
+};
+
 // 1. Explicit CORS configuration
 const allowedOrigins = [
   'https://portfolio-nine-sepia-91.vercel.app',
@@ -45,7 +59,7 @@ app.options('*', cors());
 
 // 2. Body parsing middleware
 app.use(express.json({ limit: '1mb' }));
-app.use('/uploads', express.static(uploadsPath));
+app.use('/uploads', uploadsFileHandler, express.static(uploadsPath));
 
 // 3. Database connection middleware (MUST BE BEFORE ROUTES)
 app.use(async (req, _res, next) => {

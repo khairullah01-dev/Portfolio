@@ -12,6 +12,28 @@ const Skills = () => {
   const [img2, setImg2] = useState(projectEcommerce1)
   const [img3, setImg3] = useState(projectEcommerce2)
 
+  const handleDownloadResume = async () => {
+    const targetUrl = resumeUrl || '/resume.pdf'
+
+    try {
+      const response = await fetch(targetUrl)
+      if (!response.ok) throw new Error('Resume not available')
+
+      const blob = await response.blob()
+      const blobUrl = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = blobUrl
+      link.download = 'resume.pdf'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(blobUrl)
+      return
+    } catch (_error) {
+      window.open(targetUrl, '_blank', 'noopener,noreferrer')
+    }
+  }
+
   useEffect(() => {
     fetch(`${API_BASE_URL}/contact`)
       .then(async (res) => {
@@ -42,15 +64,13 @@ const Skills = () => {
             <h2 className="mt-2 mb-6 text-3xl font-extrabold text-slate-900 sm:text-4xl">
               {skillsTitle}
             </h2>
-            <a
-              href={resumeUrl}
-              download="resume.pdf"
-              target="_blank"
-              rel="noreferrer"
+            <button
+              type="button"
+              onClick={handleDownloadResume}
               className="inline-flex rounded-full bg-[#132247] px-6 py-3 font-semibold text-white transition-all duration-300 hover:bg-[#1e3264] hover:shadow-md hover:scale-105 active:scale-95"
             >
               Download CV
-            </a>
+            </button>
             <p className="mt-8 text-base leading-relaxed text-slate-600">
               {skillsBio}
             </p>
