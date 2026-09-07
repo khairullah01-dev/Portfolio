@@ -184,222 +184,7 @@ export default function ContactManager() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-8">
-        {/* Section 1: Hero & Main Intro */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
-          <div className="border-b border-slate-100 pb-3 flex items-center gap-2">
-            <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            <h3 className="text-lg font-bold text-slate-900">1. Hero Section Settings</h3>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6">
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
-                Hero Name / Title
-              </label>
-              <input
-                type="text"
-                value={contact.heroName || ''}
-                onChange={(e) => handleChange('heroName', e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
-                placeholder="e.g. Khairullah"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
-                Hero Tagline / Bio Description
-              </label>
-              <textarea
-                rows="3"
-                value={contact.heroBio || ''}
-                onChange={(e) => handleChange('heroBio', e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
-                placeholder="Describe your role or value proposition shown in the hero section..."
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Section 2: Skills Section */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
-          <div className="border-b border-slate-100 pb-3 flex items-center gap-2">
-            <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <h3 className="text-lg font-bold text-slate-900">2. Skills Section Settings</h3>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6">
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
-                Skills Section Title
-              </label>
-              <input
-                type="text"
-                value={contact.skillsTitle || ''}
-                onChange={(e) => handleChange('skillsTitle', e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
-                placeholder="e.g. Front-end developer"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
-                Skills Section Bio / Summary
-              </label>
-              <textarea
-                rows="3"
-                value={contact.skillsBio || ''}
-                onChange={(e) => handleChange('skillsBio', e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
-                placeholder="Overview of your technical expertise and background..."
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Section 3: Experience & Projects Section Bios */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
-          <div className="border-b border-slate-100 pb-3 flex items-center gap-2">
-            <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-            <h3 className="text-lg font-bold text-slate-900">3. Section Description Texts</h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
-                Experience Section Description
-              </label>
-              <textarea
-                rows="3"
-                value={contact.experienceBio || ''}
-                onChange={(e) => handleChange('experienceBio', e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
-                placeholder="Text displayed above the stats counters..."
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
-                Projects Section Description
-              </label>
-              <textarea
-                rows="3"
-                value={contact.projectsBio || ''}
-                onChange={(e) => handleChange('projectsBio', e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
-                placeholder="Text displayed above the project cards grid..."
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Section 4: Contact Information */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
-          <div className="border-b border-slate-100 pb-3 flex items-center gap-2">
-            <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <h3 className="text-lg font-bold text-slate-900">4. Contact Information</h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Phone</label>
-              <input
-                type="text"
-                value={contact.phone || ''}
-                onChange={(e) => handleChange('phone', e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
-                placeholder="+99 999999999"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Email</label>
-              <input
-                type="email"
-                value={contact.email || ''}
-                onChange={(e) => handleChange('email', e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
-                placeholder="myemail@example.com"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">LinkedIn Profile URL</label>
-              <input
-                type="text"
-                value={contact.linkedin || ''}
-                onChange={(e) => handleChange('linkedin', e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
-                placeholder="https://linkedin.com/in/..."
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Section 5: Social Links */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
-          <div className="border-b border-slate-100 pb-3 flex items-center gap-2">
-            <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-            </svg>
-            <h3 className="text-lg font-bold text-slate-900">5. Social Media Links</h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Facebook URL</label>
-              <input
-                type="text"
-                value={contact.facebook || ''}
-                onChange={(e) => handleChange('facebook', e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
-                placeholder="https://facebook.com/..."
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Twitter / X URL</label>
-              <input
-                type="text"
-                value={contact.twitter || ''}
-                onChange={(e) => handleChange('twitter', e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
-                placeholder="https://twitter.com/..."
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Instagram URL</label>
-              <input
-                type="text"
-                value={contact.instagram || ''}
-                onChange={(e) => handleChange('instagram', e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
-                placeholder="https://instagram.com/..."
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-end pt-2">
-          <button
-            type="submit"
-            disabled={saving}
-            className="inline-flex items-center justify-center rounded-xl bg-[#132247] hover:bg-[#1e3264] px-8 py-3.5 text-sm font-bold text-white shadow-md hover:scale-105 active:scale-95 disabled:opacity-60 transition-all duration-300 cursor-pointer"
-          >
-            {saving ? 'Saving Settings...' : 'Save All Settings'}
-          </button>
-        </div>
-      </form>
-
-      {/* Asset Uploads Section */}
+          {/* Asset Uploads Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Profile Picture Card */}
         <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
@@ -622,6 +407,222 @@ export default function ContactManager() {
           </div>
         </div>
       </div>
+        {/* Section 1: Hero & Main Intro */}
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
+          <div className="border-b border-slate-100 pb-3 flex items-center gap-2">
+            <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            <h3 className="text-lg font-bold text-slate-900">1. Hero Section Settings</h3>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6">
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                Hero Name / Title
+              </label>
+              <input
+                type="text"
+                value={contact.heroName || ''}
+                onChange={(e) => handleChange('heroName', e.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
+                placeholder="e.g. Khairullah"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                Hero Tagline / Bio Description
+              </label>
+              <textarea
+                rows="3"
+                value={contact.heroBio || ''}
+                onChange={(e) => handleChange('heroBio', e.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
+                placeholder="Describe your role or value proposition shown in the hero section..."
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Section 2: Skills Section */}
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
+          <div className="border-b border-slate-100 pb-3 flex items-center gap-2">
+            <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <h3 className="text-lg font-bold text-slate-900">2. Skills Section Settings</h3>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6">
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                Skills Section Title
+              </label>
+              <input
+                type="text"
+                value={contact.skillsTitle || ''}
+                onChange={(e) => handleChange('skillsTitle', e.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
+                placeholder="e.g. Front-end developer"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                Skills Section Bio / Summary
+              </label>
+              <textarea
+                rows="3"
+                value={contact.skillsBio || ''}
+                onChange={(e) => handleChange('skillsBio', e.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
+                placeholder="Overview of your technical expertise and background..."
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Section 3: Experience & Projects Section Bios */}
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
+          <div className="border-b border-slate-100 pb-3 flex items-center gap-2">
+            <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+            <h3 className="text-lg font-bold text-slate-900">3. Section Description Texts</h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                Experience Section Description
+              </label>
+              <textarea
+                rows="3"
+                value={contact.experienceBio || ''}
+                onChange={(e) => handleChange('experienceBio', e.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
+                placeholder="Text displayed above the stats counters..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                Projects Section Description
+              </label>
+              <textarea
+                rows="3"
+                value={contact.projectsBio || ''}
+                onChange={(e) => handleChange('projectsBio', e.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
+                placeholder="Text displayed above the project cards grid..."
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Section 4: Contact Information */}
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
+          <div className="border-b border-slate-100 pb-3 flex items-center gap-2">
+            <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <h3 className="text-lg font-bold text-slate-900">4. Contact Information</h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Phone</label>
+              <input
+                type="text"
+                value={contact.phone || ''}
+                onChange={(e) => handleChange('phone', e.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
+                placeholder="+99 999999999"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Email</label>
+              <input
+                type="email"
+                value={contact.email || ''}
+                onChange={(e) => handleChange('email', e.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
+                placeholder="myemail@example.com"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">LinkedIn Profile URL</label>
+              <input
+                type="text"
+                value={contact.linkedin || ''}
+                onChange={(e) => handleChange('linkedin', e.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
+                placeholder="https://linkedin.com/in/..."
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Section 5: Social Links */}
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
+          <div className="border-b border-slate-100 pb-3 flex items-center gap-2">
+            <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+            </svg>
+            <h3 className="text-lg font-bold text-slate-900">5. Social Media Links</h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Facebook URL</label>
+              <input
+                type="text"
+                value={contact.facebook || ''}
+                onChange={(e) => handleChange('facebook', e.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
+                placeholder="https://facebook.com/..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Twitter / X URL</label>
+              <input
+                type="text"
+                value={contact.twitter || ''}
+                onChange={(e) => handleChange('twitter', e.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
+                placeholder="https://twitter.com/..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Instagram URL</label>
+              <input
+                type="text"
+                value={contact.instagram || ''}
+                onChange={(e) => handleChange('instagram', e.target.value)}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:bg-white focus:border-[#132247] focus:outline-none transition-all duration-300"
+                placeholder="https://instagram.com/..."
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-end pt-2">
+          <button
+            type="submit"
+            disabled={saving}
+            className="inline-flex items-center justify-center rounded-xl bg-[#132247] hover:bg-[#1e3264] px-8 py-3.5 text-sm font-bold text-white shadow-md hover:scale-105 active:scale-95 disabled:opacity-60 transition-all duration-300 cursor-pointer"
+          >
+            {saving ? 'Saving Settings...' : 'Save All Settings'}
+          </button>
+        </div>
+      </form>
+
+    
     </div>
   );
 }
