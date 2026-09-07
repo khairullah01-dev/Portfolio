@@ -58,14 +58,16 @@ const Hero = () => {
 
                 <div className="relative flex justify-center md:justify-end mt-10 md:mt-0 z-0">
                     <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
-                        <img
-                            src={heroImage}
-                            alt=""
-                            loading="lazy"
-                            width="500"
-                            height="500"
-                            className="mx-auto w-full max-h-[400px] md:max-h-[500px] object-cover rounded-t-2xl drop-shadow-[0_20px_35px_rgba(0,0,0,0.3)]"
-                        />
+                        {heroImage && (
+                            <img
+                                src={heroImage}
+                                alt=""
+                                loading="lazy"
+                                width="500"
+                                height="500"
+                                className="mx-auto w-full max-h-[400px] md:max-h-[500px] object-cover rounded-2xl drop-shadow-[0_20px_35px_rgba(0,0,0,0.3)]"
+                            />
+                        )}
                     </div>
                 </div>
             </div>
